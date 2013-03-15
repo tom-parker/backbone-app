@@ -11,27 +11,32 @@ define(
             routes : {
                 '': 'base',
                 'search/:query': 'search',
+                'search/:query/:section': 'search',
             },
 
             base : function() {
-                console.log('base route');
                 this.setCurrentView(BaseView);
             },
 
-            search : function(query) {
+            search : function(query, section) {
                 this.setCurrentView(ListView, {
-                    query : query
+                    query : query,
+                    section : section
                 });
             },
 
-
+            //switch view based on route
             setCurrentView : function(View, options) {
-                var view;
+                var self = this;
                 if(this.currentView) {
-                    this.currentView.destory();
+                    $('.wrapper').fadeOut(function(){
+                        self.currentView.remove();
+                        self.currentView = new View(options);
+                        $(this).fadeIn();
+                    });
+                    return this;
                 }
-
-                view = new View(options);
+                self.currentView = new View(options);
             }
 
         });

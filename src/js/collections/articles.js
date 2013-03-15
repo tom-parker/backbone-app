@@ -6,7 +6,9 @@ define(
 
     function(Backbone, Article) {
         var Articles = Backbone.Collection.extend({
+
             model: Article
+
         });
 
         return Articles;

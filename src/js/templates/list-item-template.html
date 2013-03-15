@@ -1,7 +1,11 @@
 <p>
-    <a href="#" class="btn"><%= webTitle %></a>
+    <a href="#" class="btn" data-bypass="true"><%= model.webTitle %></a>
 </p>
 <div class="content">
-    <%= fields.body %>
+    <p><img src="<%= model.fields.thumbnail %>" alt="<%= model.webTitle %>"></p>
+    <%= model.fields.body %>
+    <% if(!section) { %>
+        <p><a href="/search/latest/<%= model.sectionId %>">View other content from the <%= model.sectionName %> section</a>
+    <% } %>
 </div>
 

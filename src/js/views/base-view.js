@@ -7,24 +7,25 @@ define(
 
     function(Backbone, _, baseTemplate) {
         var BaseView = Backbone.View.extend({
-            template: _.template(baseTemplate),
 
-            el: $('.wrapper'),
+            template : _.template(baseTemplate),
 
-            initialize: function() {
-                console.log('init');
+            initialize : function() {
                 this.render();
             },
 
-            events: {
+            events : {
                 'click .js-search' : 'search'
             },
 
-            render: function() {
+            render : function() {
                 this.$el.html(this.template());
+                $('.wrapper').html(this.$el);
+                return this;
             },
 
-            search: function(e) {
+            //Update Backbone history with relevant search term
+            search : function(e) {
                 e.preventDefault();
                 var searchValue = this.$el.find('#search').val();
                 if(searchValue !== ''){
